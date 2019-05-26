@@ -302,8 +302,8 @@ RequestSigner.prototype.parsePath = function() {
   // all services don't encode characters > 255 correctly
   // So if there are non-reserved chars (and it's not already all % encoded), just encode them all
   if (/[^0-9A-Za-z!'()*\-._~%/]/.test(path)) {
-    path = path.split('/').map(function(piece) {
-      return encodeURIComponent(decodeURIComponent(piece))
+    path = path.split('/').map(function(piece, i) {
+        return i === 0 ? piece : encodeURIComponent(decodeURIComponent(piece))
     }).join('/')
   }
 
